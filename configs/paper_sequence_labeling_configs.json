@@ -1,0 +1,1126 @@
+{
+    "configs": [
+        {
+            "experiment_script" : "sumie/batch_experiments/sequence_labeling_with_lm_loss_batch_experiment.py",
+            "config" : {
+                "experiment_name" : "sequence_labeling", 
+                "run" : "roberta_NTI_LM_line_breaks_and_bullets_0",
+                "experiment_description" : "Extract tasks from writing regions using a sequence labeling approach with transformers.",
+                "experiment_dir" : "./experiments/",
+                "use_temp_dir" : false, 
+                "temp_dir": "EDIT: Path if you want to use a temporary (potentially faster) directory to store experiment artifacts and results",
+                "copy_model_checkpoint": false,
+
+                "train_config" : {
+                    "run_exp": true,
+                    "labeling_scheme": "task_NTI_with_line_breaks_and_bullets", 
+                    "model_name" : "roberta-base",
+                    "tokenizer_name": "roberta", 
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets", 
+                    "train_data_path":  "data/train.csv", 
+                    "val_data_path": "data/val.csv", 
+                    "lr" : 0.000001,
+                    "batch_size": 3, 
+                    "num_epochs": 100, 
+                    "log_interval": 1, 
+                    "checkpoint_interval": 1, 
+                    "loss_weights": "class_weights",
+                    "lm_loss_weight": 0.1, 
+                    "exp_decay_lm_loss_weight": false, 
+                    "mlm_probability": 0.15, 
+                    "random_seed": 343
+                }, 
+
+                "predict_config" : {
+                    "run_exp": true,
+                    "labeling_scheme": "task_NTI_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets", 
+                    "model_name" : "roberta-base",
+                    "tokenizer_name": "roberta", 
+                    "test_data_path":  "data/test.csv"
+                }, 
+
+                "eval_config": {
+                    "run_exp": true,
+                    "write_dynamic_file_extension" : false,
+                    "write_to_leaderboard": true,
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_and_bullets_0", 
+                    "leaderboard_file_name": "leaderboard_paper.csv",
+                    "task_metrics": [
+                        "task_recall",
+                        "task_precision",
+                        "task_f1", 
+                        "non-task_recall", 
+                        "non-task_precision",
+                        "non-task_f1", 
+                        "accuracy"
+                    ],
+
+                    "seg_metrics": [
+                        "boundary_similarity",
+                        "pk",
+                        "miss(es)", 
+                        "sub(s)", 
+                        "near"
+                    ], 
+                    
+                    "seg_levels": [
+                        "true_positive", 
+                        "region",
+                        "sentence"
+                    ] 
+                }, 
+
+                "onnx_config": {
+                    "run_exp": false,
+                    "model_type" : "sequence_labeling",
+                    "model_name" : "roberta-base", 
+                    "input_format_type" : "default", 
+                    "tokenizer_name" : "roberta", 
+                    "labeling_scheme" : "task_NTI_with_line_breaks_and_bullets"
+                }
+            }
+        },
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_and_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_and_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_and_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_and_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_and_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_and_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_and_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_and_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_line_breaks_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_line_breaks_4"
+                }
+            }
+        },
+        
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_bullets_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_LM_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_LM_4"
+                }
+            }
+        },
+        
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_and_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets", 
+                    "lm_loss_weight": false
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_and_bullets_0"
+                }
+            }
+        },
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_and_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_and_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_and_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_and_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_and_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_and_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_and_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_and_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_line_breaks_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_line_breaks_4"
+                }
+            }
+        },
+        
+        {
+            "config" : {
+                "run" : "roberta_NTI_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_bullets_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_NTI",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_NTI",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_NTI_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_NTI_4"
+                }
+            }
+        },
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_and_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets", 
+                    "lm_loss_weight": 0.1
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_and_bullets_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_and_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_and_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_and_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_and_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_and_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_and_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_and_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_and_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_line_breaks_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_line_breaks_4"
+                }
+            }
+        },
+        
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_bullets_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_LM_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_LM_4"
+                }
+            }
+        },
+        
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_and_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets", 
+                    "lm_loss_weight": false
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO_with_line_breaks_and_bullets",
+                    "data_schema_type": "sequence_labeling_with_line_breaks_and_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_and_bullets_0"
+                }
+            }
+        },
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_and_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_and_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_and_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_and_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_and_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_and_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_and_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_and_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO_with_line_breaks",
+                    "data_schema_type": "sequence_labeling_with_line_breaks"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_line_breaks_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_line_breaks_4"
+                }
+            }
+        },
+        
+        {
+            "config" : {
+                "run" : "roberta_BIO_bullets_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO_with_bullets",
+                    "data_schema_type": "sequence_labeling_with_bullets"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_bullets_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_bullets_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_bullets_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_bullets_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_bullets_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_bullets_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_bullets_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_bullets_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_bullets_4"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_0",
+                "train_config" : {
+                    "random_seed": 343,
+                    "labeling_scheme": "task_BIO",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "predict_config": {
+                    "labeling_scheme": "task_BIO",
+                    "data_schema_type": "sequence_labeling"
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_0"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_1",
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_1"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_2",
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_2"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_3",
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_3"
+                }
+            }
+        }, 
+
+        {
+            "config" : {
+                "run" : "roberta_BIO_4",
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "roberta_BIO_4"
+                }
+            }
+        }
+    ]
+}

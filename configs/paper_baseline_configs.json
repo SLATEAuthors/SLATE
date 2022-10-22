@@ -1,0 +1,228 @@
+{
+    "configs": [
+        {
+            "experiment_script" : "sumie/batch_experiments/sentence_segmentation_and_task_classification.py",
+            "config" : {   
+                "experiment_name" : "baseline_approach", 
+                "run" : "baseline_0",
+                "experiment_description" : "Baseline approach for paper",
+                "experiment_dir" : "./experiments/",
+                "use_temp_dir" : false, 
+                "temp_dir": "EDIT: Path if you want to use a temporary (potentially faster) directory to store experiment artifacts and results",
+                "copy_model_checkpoint": false, 
+            
+                "sentence_seg_train_config" : {
+                    "run_exp": false,
+                    "labeling_scheme": "sentence_BI", 
+                    "model_name" : "roberta-base",
+                    "tokenizer_name": "roberta", 
+                    "data_schema_type": "sequence_labeling", 
+                    "train_data_path":  "data/train.csv", 
+                    "val_data_path": "data/val.csv", 
+                    "lr" : 0.000001,
+                    "batch_size": 3, 
+                    "num_epochs": 100, 
+                    "log_interval": 1, 
+                    "checkpoint_interval": 1, 
+                    "loss_weights": "class_weights",
+                    "random_seed": 343
+                }, 
+            
+                "sentence_seg_predict_config" : {
+                    "run_exp": false,
+                    "labeling_scheme": "sentence_BI", 
+                    "data_schema_type": "sequence_labeling",
+                    "model_name" : "roberta-base",
+                    "tokenizer_name": "roberta", 
+                    "test_data_path":  "data/test.csv"
+                }, 
+            
+                "sentence_seg_onnx_config": {
+                    "run_exp": true,
+                    "model_type" : "sequence_labeling",
+                    "model_name" : "roberta-base", 
+                    "input_format_type" : "default", 
+                    "tokenizer_name" : "roberta", 
+                    "labeling_scheme" : "sentence_BI"
+                },
+            
+                "sentence_seg_post_process_config": {
+                    "run_exp": true,
+                    "sentence_seg_suffix": "sentences"
+                },
+                
+                "train_config" : {
+                    "run_exp": false,
+                    "train_data_file_name": "data/train.csv",
+                    "val_data_file_name": "data/val.csv",
+                    "train_data_schema_type": "task_classification",
+                    "model_checkpoint": "roberta-base",
+                    "num_labels": 2,
+                    "batch_size": 16,
+                    "lr": 1e-6,
+                    "epochs": 100,
+                    "freeze_base_layers": false,
+                    "freeze_inside_layers": false,
+                    "gradual_unfreezing": false,
+                    "num_layers": 12,
+                    "patience": 20,
+                    "model_name": "roberta_with_clf_head",
+                    "tokenizer_name" : "roberta",
+                    "no_models_saved": 1,
+                    "linear_1_in_features": 768,
+                    "linear_1_out_features": 3072,
+                    "viz_lr": false,
+                    "viz_loss": false,
+                    "viz_weights_norm": false,
+                    "viz_weights_hist": false,
+                    "viz_grads_norm": false,
+                    "viz_grads_hist": false,
+                    "piecewise_linear_scheduler": "",
+                    "discriminative_learning": false,
+                    "decreasing_factor": 2.6,
+                    "dropout_prob": 0,
+                    "optimizer": "Adam",
+                    "eps": 1e-8,
+                    "beta1": 0.9,
+                    "beta2": 0.9999,
+                    "weight_decay": 0,
+                    "clip_grad_norm": false,
+                    "max_norm": 1,
+                    "no_of_pooling_layers": 1,
+                    "loss_weights": false,
+                    "normalization": "batchnorm",
+                    "activation": "relu",
+                    "num_embeddings": 50264,
+                    "loss_type": "clf_loss",
+                    "clf_loss_coef": 1,
+                    "lm_loss_coef": 0.5,
+                    "random_seed": 343
+                }, 
+            
+                "predict_config" : {
+                    "run_exp": false,
+                    "test_data_file_names": "lines,groundtruth,sentences",
+                    "gold_test_data_path": "data/test.csv",
+                    "data_schema_type": "task_classification",
+                    "batch_size": 16,
+                    "model_checkpoint": "roberta-base",
+                    "num_labels": 2,
+                    "linear_1_in_features": 768,
+                    "linear_1_out_features": 3072,
+                    "dropout_prob": 0,
+                    "no_of_pooling_layers": 1,
+                    "normalization": "batchnorm",
+                    "activation": "relu",
+                    "model_name": "roberta_with_clf_head",
+                    "tokenizer_name" : "roberta",
+                    "loss_type": "clf_loss"
+                }, 
+            
+                "eval_config": {
+                    "run_exp": false,
+                    "write_dynamic_file_extension" : true,
+                    "write_to_leaderboard": true,
+                    "leaderboard_name": "baseline_0", 
+                    "leaderboard_file_name": "leaderboard_paper1.csv",
+                    "task_metrics": [
+                        "task_recall",
+                        "task_precision",
+                        "task_f1", 
+                        "non-task_recall", 
+                        "non-task_precision",
+                        "non-task_f1", 
+                        "accuracy"
+                    ],
+            
+                    "seg_metrics": [
+                        "boundary_similarity",
+                        "pk",
+                        "miss(es)", 
+                        "sub(s)", 
+                        "near"
+                    ], 
+                    
+                    "seg_levels": [
+                        "sentence", 
+                        "region",
+                        "true_positive"
+                    ] 
+                },
+            
+                "onnx_config": {
+                    "run_exp": true,
+                    "model_checkpoint": "roberta-base",
+                    "model_type" : "classification",
+                    "model_name" : "roberta_with_clf_head", 
+                    "input_format_type" : "default", 
+                    "tokenizer_name" : "roberta",
+                    "num_labels": 2,
+                    "linear_1_in_features": 768,
+                    "linear_1_out_features": 3072,
+                    "dropout_prob": 0,
+                    "no_of_pooling_layers": 1,
+                    "normalization": "batchnorm",
+                    "activation": "relu"
+                }
+                
+            }
+        },
+        {
+            "config" : {
+                "run" : "baseline_1",
+                "sentence_seg_train_config" : {
+                    "random_seed": 344
+                }, 
+                "train_config" : {
+                    "random_seed": 344
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "baseline_1"
+                }
+            }
+        },
+        {
+            "config" : {
+                "run" : "baseline_2",
+                "sentence_seg_train_config" : {
+                    "random_seed": 345
+                }, 
+                "train_config" : {
+                    "random_seed": 345
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "baseline_2"
+                }
+            }
+        },
+        {
+            "config" : {
+                "run" : "baseline_3",
+                "sentence_seg_train_config" : {
+                    "random_seed": 346
+                }, 
+                "train_config" : {
+                    "random_seed": 346
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "baseline_3"
+                }
+            }
+        },
+        {
+            "config" : {
+                "run" : "baseline_4",
+                "sentence_seg_train_config" : {
+                    "random_seed": 347
+                }, 
+                "train_config" : {
+                    "random_seed": 347
+                }, 
+                "eval_config" : {
+                    "leaderboard_name": "baseline_4"
+                }
+            }
+        }
+    ]
+}
+            
